@@ -42,9 +42,12 @@ RUN docker-php-ext-enable redis
 RUN docker-php-ext-enable memcached
 RUN docker-php-ext-enable memcache
 
+#RUN pecl install xdebug
+#RUN docker-php-ext-enable xdebug
+
 COPY ./php.ini /etc/php/7.4/php.ini
 COPY ./php-fpm-pool.conf /etc/php/7.4/pool.d/www.conf
-s
+
 
 
 ## Install composer
@@ -55,11 +58,5 @@ RUN wget https://getcomposer.org/installer && \
 
 RUN chown -R www-data:www-data .
 
-FROM dev AS debug
 
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug#RUN docker-php-ext-enable xdebug
 
-FROM dev AS prod
-
-ENV APP_ENV=prod
