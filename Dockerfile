@@ -1,7 +1,5 @@
 FROM php:7.4.7-fpm-alpine3.12 AS dev
 
-WORKDIR /app
-
 ENV APP_ENV=dev
 
 RUN apk add --update
@@ -48,13 +46,13 @@ RUN docker-php-ext-enable memcache
 COPY ./php.ini /etc/php/7.4/php.ini
 COPY ./php-fpm-pool.conf /etc/php/7.4/pool.d/www.conf
 
-
-
 ## Install composer
 RUN wget https://getcomposer.org/installer && \
     php installer --install-dir=/usr/local/bin/ --filename=composer && \
     rm installer && \
     composer global require hirak/prestissimo
+
+WORKDIR /app
 
 RUN chown -R www-data:www-data .
 
