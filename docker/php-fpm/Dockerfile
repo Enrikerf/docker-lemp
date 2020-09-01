@@ -1,16 +1,16 @@
 FROM php:7.4.7-fpm-alpine3.12
 
 # ---------------------------------------------------------- Setup build options
-ARG DOCKER_PHP_ENABLE_APCU
-ARG DOCKER_PHP_ENABLE_COMPOSER
-ARG DOCKER_PHP_ENABLE_LDAP
-ARG DOCKER_PHP_ENABLE_MEMCACHED
-ARG DOCKER_PHP_ENABLE_MONGODB
-ARG DOCKER_PHP_ENABLE_MYSQL
-ARG DOCKER_PHP_ENABLE_POSTGRESQL
-ARG DOCKER_PHP_ENABLE_REDIS
-ARG DOCKER_PHP_ENABLE_SYMFONY
-ARG DOCKER_PHP_ENABLE_XDEBUG
+ARG DOCKER_PHP_ENABLE_APCU=false
+ARG DOCKER_PHP_ENABLE_COMPOSER=false
+ARG DOCKER_PHP_ENABLE_LDAP=false
+ARG DOCKER_PHP_ENABLE_MEMCACHED=false
+ARG DOCKER_PHP_ENABLE_MONGODB=false
+ARG DOCKER_PHP_ENABLE_MYSQL=false
+ARG DOCKER_PHP_ENABLE_POSTGRESQL=false
+ARG DOCKER_PHP_ENABLE_REDIS=false
+ARG DOCKER_PHP_ENABLE_SYMFONY=false
+ARG DOCKER_PHP_ENABLE_XDEBUG=false
 ARG DOCKER_USER_UID=false
 ARG DOCKER_USER_GID=false
 
@@ -215,11 +215,9 @@ RUN if [ "${DOCKER_PHP_ENABLE_COMPOSER}" != "off" ]; then \
     fi
 
 
-ADD php.ini "$PHP_INI_DIR/php.ini"
-ADD docker-php-ext-apcu.ini "$PHP_INI_DIR/conf.d/docker-php-ext-apcu.ini"
-ADD docker-php-ext-opcache.ini "$PHP_INI_DIR/conf.d/docker-php-ext-opcache.ini"
-ADD docker-php-ext-xdebug.ini "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini"
-ADD www.conf "/usr/local/etc/php-fpm.d/www.conf"
+ADD etc/php/php.ini "$PHP_INI_DIR/php.ini"
+ADD etc/php/conf.d "$PHP_INI_DIR/conf.d/"
+ADD etc/php-fpm.d/www.conf "/usr/local/etc/php-fpm.d/www.conf"
 
 
 # Big clean
