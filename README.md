@@ -17,7 +17,7 @@ services:
     ports:
       - 80:80
   php-fpm:
-    image: enrikerf/php-fpm:<tagname>
+    image: (enrikerf/php-fpm or enrikerf/php-fpm-xdebug)
     depends_on:
       - mysql
     ports:
@@ -44,11 +44,6 @@ services:
       - ./docker/mysql/data:/var/lib/mysql:rw
 ```
 
-remember that tagname of php-fpm it is important to choose the extensions enabled, the options available:
-*   php-fpm:xdebug
-*   php-fpm:composer
-*   php-fpm:xdebug-composer
-
 the dockerfile of php-fpm support more configuration, it it is needed download the dockerfile and create a new image
 * ARG DOCKER_PHP_ENABLE_APCU=false
 * ARG DOCKER_PHP_ENABLE_COMPOSER=false
@@ -60,3 +55,6 @@ the dockerfile of php-fpm support more configuration, it it is needed download t
 * ARG DOCKER_PHP_ENABLE_REDIS=false
 * ARG DOCKER_PHP_ENABLE_SYMFONY=false
 * ARG DOCKER_PHP_ENABLE_XDEBUG=false
+
+
+It is important to notice that despite you can set your volume for your code on Php-fpm image, the Nginx image will be looking in the location that has been settled in the example
