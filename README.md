@@ -42,6 +42,13 @@ services:
       - ./docker/mysql/data:/var/lib/mysql:rw
 ```
 
+Nginx image
+===========
+
+It is important to notice that despite you can set your volume for your code on Php-fpm image, the Nginx image will be looking in the location that has been settled in the example
+
+PHP-FPM image
+=============
 the dockerfile of php-fpm support more configuration, if it is needed download the dockerfile and create a new image
 * ARG DOCKER_PHP_ENABLE_APCU=false
 * ARG DOCKER_PHP_ENABLE_COMPOSER=false
@@ -96,4 +103,3 @@ docker build --build-arg DOCKER_PHP_ENABLE_APCU=$DOCKER_PHP_ENABLE_APCU --build-
 * building the image on local and pushing to docker hub
 
 
->It is important to notice that despite you can set your volume for your code on Php-fpm image, the Nginx image will be looking in the location that has been settled in the example

@@ -66,7 +66,7 @@ RUN php -m && \
     php -m
 
 # --------------------------------------------------- Conditionnal installations
- Enable APCu
+# Enable APCu
 RUN if [ "${DOCKER_PHP_ENABLE_APCU}" != "off" ]; then \
       pecl install apcu && \
       docker-php-ext-enable apcu && \
