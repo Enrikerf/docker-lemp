@@ -67,7 +67,7 @@ RUN php -m && \
 
 # --------------------------------------------------- Conditionnal installations
 # Enable APCu
-RUN if [ "${DOCKER_PHP_ENABLE_APCU}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_APCU}" = "on" ]] ; then \
       pecl install apcu && \
       docker-php-ext-enable apcu && \
       php -m; \
@@ -76,7 +76,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_APCU}" != "off" ]; then \
     fi
 
 # Enable LDAP
-RUN if [ "${DOCKER_PHP_ENABLE_LDAP}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_LDAP}" = "on" ]] ; then \
       # Dependancy for ldap \
       apk add --update --no-cache \
           libldap && \
@@ -92,7 +92,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_LDAP}" != "off" ]; then \
     fi
 
 # Enable Memcached
-RUN if [ "${DOCKER_PHP_ENABLE_MEMCACHED}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_MEMCACHED}" = "on" ]] ; then \
       # Dependancy for ldap \
       apk add --update --no-cache \
           libmemcached-libs && \
@@ -109,7 +109,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_MEMCACHED}" != "off" ]; then \
     fi
 
 # Enable MongoDB
-RUN if [ "${DOCKER_PHP_ENABLE_MONGODB}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_MONGODB}" = "on" ]] ; then \
       apk add --update --no-cache --virtual .docker-php-mongodb-dependancies \
           # Dependancies for MongoDB \
           heimdal-dev && \
@@ -122,7 +122,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_MONGODB}" != "off" ]; then \
     fi
 
 # Enable MySQL
-RUN if [ "${DOCKER_PHP_ENABLE_MYSQL}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_MYSQL}" = "on" ]] ; then \
       apk add --update --no-cache --virtual .docker-php-mysql-dependancies \
           # Dependancy for mysql \
           mysql-client && \
@@ -139,7 +139,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_MYSQL}" != "off" ]; then \
     fi
 
 # Enable PostgreSQL
-RUN if [ "${DOCKER_PHP_ENABLE_POSTGRESQL}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_POSTGRESQL}" = "on" ]] ;  then \
       # Dependancy for PostgreSQL \
       apk add --update --no-cache \
           libpq && \
@@ -158,7 +158,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_POSTGRESQL}" != "off" ]; then \
     fi
 
 # Enable Redis
-RUN if [ "${DOCKER_PHP_ENABLE_REDIS}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_REDIS}" = "on" ]] ;  then \
       pecl install redis && \
       docker-php-ext-enable redis && \
       php -m; \
@@ -167,7 +167,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_REDIS}" != "off" ]; then \
     fi
 
 # Enable Symfony extensions
-RUN if [ "${DOCKER_PHP_ENABLE_SYMFONY}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_SYMFONY}" = "on" ]] ; then \
       # Dependancy for PostgreSQL \
       apk add --update --no-cache \
           yaml && \
@@ -182,7 +182,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_SYMFONY}" != "off" ]; then \
       echo "Skip symfony support"; \
     fi
 
-RUN if [ "${DOCKER_PHP_ENABLE_XDEBUG}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_XDEBUG}" = "on" ]] ; then \
       yes | pecl install xdebug-2.9.6 && \
       docker-php-ext-enable xdebug  && \
       php -m; \
@@ -191,7 +191,7 @@ RUN if [ "${DOCKER_PHP_ENABLE_XDEBUG}" != "off" ]; then \
     fi
 
 # Install composer.
-RUN if [ "${DOCKER_PHP_ENABLE_COMPOSER}" != "off" ]; then \
+RUN if [[ "${DOCKER_PHP_ENABLE_COMPOSER}" = "on" ]] ; then \
       EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig) && \
       php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
       ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');") && \
