@@ -1,8 +1,6 @@
 # Docker images for LEMP stack
 
->if your on github: the goal of this repository is to hold the images for it utilisation in others docker-composer or by itself,the docker-compose on this repository is for developing and documentation.
-
-To see the docker images names goes to DockerHub: https://hub.docker.com/u/enrikerf
+>if you are on github: the goal of this repository is to hold the images for it utilisation in others docker-composer or by itself,the docker-compose on this repository is for developing and documentation. To see the docker images names goes to DockerHub: https://hub.docker.com/u/enrikerf
 
 An example of utilization:
 
@@ -10,7 +8,7 @@ An example of utilization:
 version: "3.0"
 
 services:
-  nginx:
+  nginx:∫
     image: enrikerf/nginx
     depends_on:
       - php-fpm
@@ -44,7 +42,7 @@ services:
       - ./docker/mysql/data:/var/lib/mysql:rw
 ```
 
-the dockerfile of php-fpm support more configuration, it it is needed download the dockerfile and create a new image
+the dockerfile of php-fpm support more configuration, if it is needed download the dockerfile and create a new image
 * ARG DOCKER_PHP_ENABLE_APCU=false
 * ARG DOCKER_PHP_ENABLE_COMPOSER=false
 * ARG DOCKER_PHP_ENABLE_LDAP=false
