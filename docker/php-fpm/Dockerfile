@@ -71,15 +71,15 @@ RUN echo -n "With apcu support:          " ; if [[ "${DOCKER_PHP_ENABLE_APCU}" =
 #    php -m
 #
 ## --------------------------------------------------- Conditionnal installations
-## Enable APCu
-#RUN if [ "${DOCKER_PHP_ENABLE_APCU}" != "off" ]; then \
-#      pecl install apcu && \
-#      docker-php-ext-enable apcu && \
-#      php -m; \
-#    else \
-#      echo "Skip apcu support"; \
-#    fi
-#
+# Enable APCu
+RUN if [ "${DOCKER_PHP_ENABLE_APCU}" != "off" ]; then \
+      pecl install apcu && \
+      docker-php-ext-enable apcu && \
+      php -m; \
+    else \
+      echo "Skip apcu support"; \
+    fi
+
 ## Enable LDAP
 #RUN if [ "${DOCKER_PHP_ENABLE_LDAP}" != "off" ]; then \
 #      # Dependancy for ldap \
