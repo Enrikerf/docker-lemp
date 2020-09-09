@@ -210,11 +210,26 @@ RUN if [[ "${DOCKER_PHP_ENABLE_COMPOSER}" = "on" ]] ; then \
       echo "Skip composer support"; \
     fi
 
-
 ADD etc/php/php.ini "$PHP_INI_DIR/php.ini"
-ADD etc/php/conf.d "$PHP_INI_DIR/conf.d/"
+ADD etc/php/conf.d "$PHP_INI_DIR/conf.d"
 ADD etc/php-fpm.d/www.conf "/usr/local/etc/php-fpm.d/www.conf"
 
+RUN if [[ "${DOCKER_PHP_ENABLE_XDEBUG}" = "off" ]] ; then \
+      ls "$PHP_INI_DIR/conf.d" && \
+      rm "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini" && \
+      echo "remove xdebug file" && \
+      php -m; \
+    else \
+      echo "-"; \
+    fi
+RUN if [[ "${DOCKER_PHP_ENABLE_APCU}" = "off" ]] ; then \
+      ls "$PHP_INI_DIR/conf.d" && \
+      rm "$PHP_INI_DIR/conf.d/docker-php-ext-apcu.ini" && \
+      echo "remove apcu file" && \
+      php -m; \
+    else \
+      echo "-"; \
+    fi
 
 # Big clean
 RUN apk del .docker-php-global-dependancies && \

@@ -1,0 +1,37 @@
+version: "3.0"
+
+services:
+  php-fpm-xdebug:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+      args:
+        DOCKER_PHP_ENABLE_APCU: "off"
+        DOCKER_PHP_ENABLE_COMPOSER: "off"
+        DOCKER_PHP_ENABLE_LDAP: "off"
+        DOCKER_PHP_ENABLE_MEMCACHED: "off"
+        DOCKER_PHP_ENABLE_MONGODB: "off"
+        DOCKER_PHP_ENABLE_MYSQL: "off"
+        DOCKER_PHP_ENABLE_POSTGRESQL: "off"
+        DOCKER_PHP_ENABLE_REDIS: "off"
+        DOCKER_PHP_ENABLE_SYMFONY: "off"
+        DOCKER_PHP_ENABLE_XDEBUG: "on"
+    ports:
+      - "9000:9000"
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+      args:
+        DOCKER_PHP_ENABLE_APCU: "off"
+        DOCKER_PHP_ENABLE_COMPOSER: "off"
+        DOCKER_PHP_ENABLE_LDAP: "off"
+        DOCKER_PHP_ENABLE_MEMCACHED: "off"
+        DOCKER_PHP_ENABLE_MONGODB: "off"
+        DOCKER_PHP_ENABLE_MYSQL: "off"
+        DOCKER_PHP_ENABLE_POSTGRESQL: "off"
+        DOCKER_PHP_ENABLE_REDIS: "off"
+        DOCKER_PHP_ENABLE_SYMFONY: "off"
+        DOCKER_PHP_ENABLE_XDEBUG: "off"
+    ports:
+      - "9001:9001"

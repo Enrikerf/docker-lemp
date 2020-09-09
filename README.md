@@ -50,16 +50,16 @@ It is important to notice that despite you can set your volume for your code on 
 PHP-FPM image
 =============
 the dockerfile of php-fpm support more configuration, if it is needed download the dockerfile and create a new image
-* ARG DOCKER_PHP_ENABLE_APCU=false
-* ARG DOCKER_PHP_ENABLE_COMPOSER=false
-* ARG DOCKER_PHP_ENABLE_LDAP=false
-* ARG DOCKER_PHP_ENABLE_MEMCACHED=false
-* ARG DOCKER_PHP_ENABLE_MONGODB=false
-* ARG DOCKER_PHP_ENABLE_MYSQL=false
-* ARG DOCKER_PHP_ENABLE_POSTGRESQL=false
-* ARG DOCKER_PHP_ENABLE_REDIS=false
-* ARG DOCKER_PHP_ENABLE_SYMFONY=false
-* ARG DOCKER_PHP_ENABLE_XDEBUG=false
+* ARG DOCKER_PHP_ENABLE_APCU
+* ARG DOCKER_PHP_ENABLE_COMPOSER
+* ARG DOCKER_PHP_ENABLE_LDAP
+* ARG DOCKER_PHP_ENABLE_MEMCACHED
+* ARG DOCKER_PHP_ENABLE_MONGODB
+* ARG DOCKER_PHP_ENABLE_MYSQL
+* ARG DOCKER_PHP_ENABLE_POSTGRESQL
+* ARG DOCKER_PHP_ENABLE_REDIS
+* ARG DOCKER_PHP_ENABLE_SYMFONY
+* ARG DOCKER_PHP_ENABLE_XDEBUG
 
 To build this new image you can do it by:
 * building a new image through your own docker-compose and passing ARGS
@@ -93,6 +93,8 @@ services:
       - ./app:/var/www/app
 ´
 ```
+
+> TIPS: see used Dockerfile on: https://github.com/Enrikerf/docker-lemp/blob/master/docker/php-fpm/Dockerfile
 
 * creating your own repository in docker hub (with auto-build ): In this case you must to remember adding the environment variables on the autobuild and remember to create ./hooks/build file to rewrite the build command to:
 
