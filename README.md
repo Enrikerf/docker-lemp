@@ -9,13 +9,14 @@ version: "3.0"
 
 services:
   nginx:
-    image: enrikerf/nginx
+    image: enrikerf/nginx:latest
     depends_on:
       - php-fpm
     ports:
       - 80:80
+      - 9009:9009 # for xdebug
   php-fpm:
-    image: (enrikerf/php-fpm or enrikerf/php-fpm-xdebug)
+    image: enrikerf/php-fpm-xdebug:latest
     depends_on:
       - mysql
     ports:
@@ -45,7 +46,13 @@ services:
 Nginx image
 ===========
 
-It is important to notice that despite you can set your volume for your code on Php-fpm image, the Nginx image will be looking in the location that has been settled in the example
+It is important to notice that despite you can set your volume for your code on Php-fpm image, 
+the Nginx image will be looking in the location that has been settled in the example. You can change de place on your 
+local machine but de path inside de container must remain at the same place or you'll need to rebuild the image on your own.
+
+> path_to_your_code:/var/www/app
+
+you can't chage "/var/www/app"
 
 PHP-FPM image
 =============

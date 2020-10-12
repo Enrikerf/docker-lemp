@@ -1,0 +1,36 @@
+version: "3.0"
+
+services:
+  nginx:
+    image: enrikerf/nginx:latest
+    depends_on:
+      - php-fpm
+    ports:
+      - 80:80
+      - 9009:9009 #for xdebug
+  php-fpm:
+    image: enrikerf/php-fpm-xdebug:latest
+    depends_on:
+      - mysql
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./app:/var/www/app
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--default-authentication-plugin=mysql_native_password",
+      ]
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql:rw
