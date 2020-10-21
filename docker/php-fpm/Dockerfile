@@ -231,7 +231,7 @@ RUN if [[ "${DOCKER_PHP_ENABLE_APCU}" = "off" ]] ; then \
       echo "-"; \
     fi
 
-# Big clean
+# Clean
 RUN apk del .docker-php-global-dependancies && \
     rm -rf /var/cache/apk/* && \
     docker-php-source delete

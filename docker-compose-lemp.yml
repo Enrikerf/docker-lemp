@@ -16,7 +16,7 @@ services:
       args:
         DOCKER_PHP_ENABLE_APCU: "on"
         DOCKER_PHP_ENABLE_COMPOSER: "on"
-        DOCKER_PHP_ENABLE_LADP: "off"
+        DOCKER_PHP_ENABLE_LDAP: "off"
         DOCKER_PHP_ENABLE_MEMCACHED: "on"
         DOCKER_PHP_ENABLE_MONGODB: "off"
         DOCKER_PHP_ENABLE_MYSQL: "on"
