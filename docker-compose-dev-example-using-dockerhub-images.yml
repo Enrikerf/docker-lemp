@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.1"
 
 services:
   nginx:
@@ -7,7 +7,9 @@ services:
       - php-fpm
     ports:
       - 80:80
-      - 9009:9009 #for xdebug
+      - 9009:9009 # xdebug port
+    volumes:
+      - ./app:/var/www/app # if you have public web assets 
   php-fpm:
     image: enrikerf/php-fpm-xdebug:latest
     depends_on:
@@ -16,8 +18,8 @@ services:
       - "9000:9000"
     volumes:
       - ./app:/var/www/app
-      environment:
-        PHP_IDE_CONFIG: serverName=docker.local # to debug php-cli scripts
+    environment:
+      PHP_IDE_CONFIG: serverName=docker.local 
   mysql:
     image: mysql:8.0
     ports:
@@ -25,12 +27,11 @@ services:
     environment:
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
     command:
       [
         "mysqld",
         "--character-set-server=utf8mb4",
+        "--lower_case_table_names=2",
         "--collation-server=utf8mb4_unicode_ci",
         "--default-authentication-plugin=mysql_native_password",
       ]
