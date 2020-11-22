@@ -7,7 +7,7 @@ services:
       - php-fpm
     ports:
       - 80:80
-      - 9009:9009 # xdebug port
+      - 9009:9009 # xdebug psort
     volumes:
       - ./app:/var/www/app # if you have public web assets 
   php-fpm:
