@@ -1,6 +1,6 @@
 # Docker images for LEMP stack
 
->if you are on github: the goal of this repository is to hold the images for his utilisation in others docker-composer or by itself,the docker-compose on this repository is for developing and documentation. To see the docker images names goes to DockerHub: https://hub.docker.com/u/enrikerf
+>if you are on github: this repository build images automaticaly in https://hub.docker.com/u/enrikerf the docker-compose on this repository is for developing and documentation not to use it. To see the docker images names goes to DockerHub
 
 An example of use:
 
